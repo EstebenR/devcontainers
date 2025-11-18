@@ -33,20 +33,42 @@ Use Quenty's rojo `Quenty/rojo`
 rokit add quenty/rojo
 ```
 
-
-### Workspace settings
-
-Make sure to add the following to your .vscode/settings.json in your repo so that the correct lsp is used. Ideally you check this in so that everybody's works out of the box
-```json 
-"luau-lsp.sourcemap.rojoPath": "/root/.rokit/bin/luau-lsp"
-```
-
 ## Installation
 
 To get started open your project repository in vscode as a workspace. (Equivalent to opening the folder with vscode or Ctrl+Shift+A from Github Desktop)
 
-With the Dev Containers extension intalled 
+With the Dev Containers extension intalled  click on the extension's button (on the bottom left) and click `Add Dev Container Configuration Files...`. 
+
+Choose if you want to add it locally (user data folder) or to the repo (workspace), adding it to the repo will let all of your collaborators to skip the installation step.
+
+Next you'll be asked to select a template or enter a cutom id, enter the following id:
+```
+ghcr.io/EstebenR/devcontainers/nevermore
+```
+
+No additional features are needed, just click Ok.
+
+You may be prompted to Reopen in Container by VSCode or just click on the extension menu again and click 'Reopen in Container'
+
+So that all tools are installed make sure to run
+```bash
+rokit install
+```
+and 
+```bash
+npm install
+```
+
 
 ## Continued use
 
 Simply click 'Reopen in container' from the Dev Containers menu, it should all be set up from the installation step.
+
+If it's your first time running this container then make sure to run 
+```bash
+rokit install
+```
+and 
+```bash
+npm install
+```
