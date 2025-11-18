@@ -1,0 +1,13 @@
+{
+    "name": "nevermore",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "JohnnyMorganz.luau-lsp@1.46.0"
+            ]
+        }
+    }
+}
