@@ -24,7 +24,7 @@ RUN curl -sSf https://raw.githubusercontent.com/rojo-rbx/rokit/main/scripts/inst
 
 # Install Pesde
 COPY installPesde.sh /tmp/installPesde.sh
-RUN bash -c '/tmp/installPesde.sh'
+RUN chmod +x /tmp/installPesde.sh && bash -c '/tmp/installPesde.sh'
 ENV PATH="${PATH}:/root/.pesde/bin"
 
 # Install Nevermore
