@@ -5,6 +5,9 @@
     },
     "customizations": {
         "vscode": {
+            "settings": {
+                "luau-lsp.server.path": "/root/.rokit/bin/luau-lsp"
+            },
             "extensions": [
                 "JohnnyMorganz.luau-lsp@1.46.0"
             ]
