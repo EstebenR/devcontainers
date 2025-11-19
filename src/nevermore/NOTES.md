@@ -35,7 +35,7 @@ rokit add quenty/rojo
 
 ## Installation
 
-To get started open your project repository in vscode as a workspace. (Equivalent to opening the folder with vscode or Ctrl+Shift+A from Github Desktop)
+To get started open your project repository in vscode as a workspace(Equivalent to opening the folder with vscode or Ctrl+Shift+A from Github Desktop) and start the Docker client.
 
 With the Dev Containers extension intalled  click on the extension's button (on the bottom left) and click `Add Dev Container Configuration Files...`. 
 
@@ -61,6 +61,8 @@ npm install
 
 
 ## Continued use
+
+Before opening the container, the docker app needs to have been launched. If it's not, VSCode will let you know so no problem.
 
 Simply click 'Reopen in container' from the Dev Containers menu, it should all be set up from the installation step.
 
