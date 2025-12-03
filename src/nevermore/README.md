@@ -70,6 +70,7 @@ and
 npm install
 ```
 
+Afterwards make sure to reload your luau lsp in vscode if it gave you any errors about the sourcemap, you can do it by pressing Ctrl+Shift+P and running `Luau: Reload Language Server`. If running in a large codebase it might take a bit to index all files the first time.
 
 ## Continued use
 
@@ -85,6 +86,8 @@ and
 ```bash
 npm install
 ```
+
+Afterwards make sure to reload your luau lsp in vscode if it gave you any errors about the sourcemap, you can do it by pressing Ctrl+Shift+P and running `Luau: Reload Language Server`. If running in a large codebase it might take a bit to index all files the first time.
 
 ---
 
