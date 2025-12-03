@@ -13,10 +13,11 @@ ENV PATH=$PATH:/home/node/.npm-global/bin
 # optionally if you want to run npm global bin without specifying path
 
 # Update and install dependencies 
-RUN apt-get update  && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     curl \
     unzip \
     libdbus-1-3 \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Rokit
@@ -31,4 +32,4 @@ ENV PATH="${PATH}:/root/.pesde/bin"
 RUN npm install -g @quenty/nevermore-cli
 
 # Install Luau lsp ver 1.46 by Quenty, use a temp rokit project for it
-# RUN mkdir /tmp/rokit && cd /tmp/rokit/ && rokit init && rokit add Quenty/luau-lsp@1.46.0-quenty
+RUN mkdir /tmp/rokit && cd /tmp/rokit/ && rokit init && rokit add Quenty/luau-lsp@1.46.0-quenty
