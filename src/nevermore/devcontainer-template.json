@@ -1,6 +1,6 @@
 {
     "id": "nevermore",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "name": "Nevermore Roblox",
     "description": "A container for easy Nevermore setup with Luau LSP included",
     "publisher": "Papabos",

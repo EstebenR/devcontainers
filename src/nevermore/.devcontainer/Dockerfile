@@ -31,7 +31,7 @@ ENV PATH="${PATH}:/root/.pesde/bin"
 # Install Nevermore
 RUN npm install -g @quenty/nevermore-cli
 
-# Install Luau lsp ver 1.46 by Quenty
+# Install Luau lsp ver 1.58 by Quenty
 RUN /root/.rokit/bin/rokit trust Quenty/luau-lsp && \
-    /root/.rokit/bin/rokit add --global Quenty/luau-lsp@1.46.0-quenty
+    /root/.rokit/bin/rokit add --global Quenty/luau-lsp@1.58.0-quenty.1
 
