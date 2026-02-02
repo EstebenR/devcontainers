@@ -1,0 +1,132 @@
+name: Update Luau LSP version
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ----------------------------
+      # Fetch latest Quenty release
+      # ----------------------------
+      - name: Fetch latest Quenty luau-lsp release
+        id: release
+        run: |
+          TAG=$(curl -fsSL \
+            https://api.github.com/repos/Quenty/luau-lsp/releases/latest \
+            | jq -r .tag_name)
+
+          # Strip leading v if present
+          FULL=$(echo "$TAG" | sed -E 's/^v//')
+
+          # Strip -quenty suffix for VS Code extension
+          PLAIN=$(echo "$FULL" | sed -E 's/-quenty.*$//')
+
+          echo "full=$FULL" >> "$GITHUB_OUTPUT"
+          echo "plain=$PLAIN" >> "$GITHUB_OUTPUT"
+
+      # ----------------------------
+      # Update Dockerfile
+      # ----------------------------
+      - name: Update Dockerfile luau-lsp version
+        run: |
+          FILE=src/nevermore/.devcontainer/Dockerfile
+
+          sed -i -E \
+            's|(Quenty/luau-lsp@)[^ ]+|\1${{ steps.release.outputs.full }}|' \
+            "$FILE"
+
+      # ----------------------------
+      # Update devcontainer.json
+      # ----------------------------
+      - name: Update devcontainer.json
+        run: |
+          FILE=src/nevermore/.devcontainer/devcontainer.json
+
+          jq \
+            --arg full "${{ steps.release.outputs.full }}" \
+            --arg plain "${{ steps.release.outputs.plain }}" \
+            '
+            .customizations.vscode.settings["luau-lsp.server.path"]
+              = "/root/.rokit/tool-storage/quenty/luau-lsp/" + $full
+            |
+            .customizations.vscode.extensions
+              |= map(
+                  if startswith("JohnnyMorganz.luau-lsp@")
+                  then "JohnnyMorganz.luau-lsp@" + $plain
+                  else .
+                  end
+                )
+            ' "$FILE" > "$FILE.tmp"
+
+          mv "$FILE.tmp" "$FILE"
+
+      # ----------------------------
+      # Bump devcontainer template minor version
+      # ----------------------------
+      - name: Bump devcontainer template minor version
+        run: |
+          FILE=src/nevermore/devcontainer-template.json
+
+          CURRENT=$(jq -r '.version' "$FILE")
+
+          MAJOR=$(echo "$CURRENT" | cut -d. -f1)
+          MINOR=$(echo "$CURRENT" | cut -d. -f2)
+
+          NEXT_MINOR=$((MINOR + 1))
+          NEXT_VERSION="${MAJOR}.${NEXT_MINOR}"
+
+          jq --arg v "$NEXT_VERSION" '.version = $v' "$FILE" > "$FILE.tmp"
+          mv "$FILE.tmp" "$FILE"
+
+      # ----------------------------
+      # Create or update PR
+      # ----------------------------
+      - name: Create pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet; then
+            echo "No changes detected"
+            exit 0
+          fi
+
+          BRANCH="bot/update-luau-lsp-${{ steps.release.outputs.plain }}"
+
+          git checkout -b "$BRANCH"
+
+          git config user.name "luau-lsp-bot"
+          git config user.email "luau-lsp-bot@users.noreply.github.com"
+
+          git add \
+            src/nevermore/.devcontainer/Dockerfile \
+            src/nevermore/.devcontainer/devcontainer.json \
+            src/nevermore/devcontainer-template.json
+
+          git commit -m "chore(devcontainer): bump luau-lsp to ${{ steps.release.outputs.full }}"
+
+          git push -u origin "$BRANCH"
+
+          gh pr create \
+            --title "chore(devcontainer): bump luau-lsp to ${{ steps.release.outputs.full }}" \
+            --body "Automated update of luau-lsp.
+
+            -- Dockerfile uses \`${{ steps.release.outputs.full }}\`
+            -- VS Code server path updated
+            -- VS Code extension pinned to \`${{ steps.release.outputs.plain }}\`
+            -- devcontainer template minor version bumped" \
+            --base main \
+            --head "$BRANCH" \
+          || gh pr edit "$BRANCH" \
+            --title "chore(devcontainer): bump luau-lsp to ${{ steps.release.outputs.full }}" \
+            --body "Automated update of luau-lsp."
