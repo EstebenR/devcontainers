@@ -1,19 +1,19 @@
 {
-    "id": "nevermore",
-    "version": "1.0.3",
-    "name": "Nevermore Roblox",
-    "description": "A container for easy Nevermore setup with Luau LSP included",
-    "publisher": "Papabos",
-    "documentationURL": "https://github.com/EstebenR/devcontainers/tree/main/src/nevermore",
-    "licenseURL": "https://github.com/EstebenR/devcontainers/blob/main/LICENSE",
-    "options": {},
-    "platforms": [
-        "Any"
-    ],
-    "keywords": [
-        "Rokit",
-        "Roblox",
-        "Rojo",
-        "Nevermore"
-    ]
+  "id": "nevermore",
+  "version": "1.1",
+  "name": "Nevermore Roblox",
+  "description": "A container for easy Nevermore setup with Luau LSP included",
+  "publisher": "Papabos",
+  "documentationURL": "https://github.com/EstebenR/devcontainers/tree/main/src/nevermore",
+  "licenseURL": "https://github.com/EstebenR/devcontainers/blob/main/LICENSE",
+  "options": {},
+  "platforms": [
+    "Any"
+  ],
+  "keywords": [
+    "Rokit",
+    "Roblox",
+    "Rojo",
+    "Nevermore"
+  ]
 }
