@@ -32,14 +32,7 @@ There is some setup required before going ahead with running your project a litt
 This container comes with `Rokit` for toolchain management, it's also compatible with preexisting Aftman and Foreman managed projects. If you don't know which one to use/ don't have a preference, use the bundled Rokit.
 For this guide, it is assumed that you use rokit in your project, use the equivalent commands for whichever toolchain manager you're using.
 
-
-Make sure to add `Quenty/luau-lsp@1.46.0-quenty` to your repository by running 
-```bash
-rokit add Quenty/luau-lsp@1.46.0-quenty
-```
-this will make available the correct lsp binary for Nevermore for our extension to use, more on that later. You have to install/upgrade to this version because we bundle the latest official Luau LSP extension version that's compatible with Quenty's.
-
-Use Quenty's rojo `Quenty/rojo`
+Use Quenty's rojo `Quenty/rojo` for all your rojo needs
 ```bash
 rokit add quenty/rojo
 ```
@@ -52,10 +45,7 @@ With the Dev Containers extension intalled  click on the extension's button (on 
 
 Choose if you want to add it locally (user data folder) or to the repo (workspace), adding it to the repo will let all of your collaborators to skip the installation step.
 
-Next you'll be asked to select a template or enter a cutom id, enter the following id:
-```
-ghcr.io/EstebenR/devcontainers/nevermore
-```
+Next you'll be asked to select a template, search for `Nevermore Roblox`. If it doesn't show up make sure to click on `Show All Templates`
 
 No additional features are needed, just click Ok.
 
