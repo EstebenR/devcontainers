@@ -1,4 +1,7 @@
 FROM node:24-trixie-slim
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 # Possibly move to node:24-slim
 
 # Rojo port
@@ -29,9 +32,12 @@ RUN chmod +x /tmp/installPesde.sh && bash -c '/tmp/installPesde.sh'
 ENV PATH="${PATH}:/root/.pesde/bin"
 
 # Install Nevermore
-RUN npm install -g @quenty/nevermore-cli
+RUN pnpm install -g @quenty/nevermore-cli
 
 # Install Luau lsp ver 1.58 by Quenty
 RUN /root/.rokit/bin/rokit trust Quenty/luau-lsp && \
     /root/.rokit/bin/rokit add --global Quenty/luau-lsp@1.58.0-quenty.1
 
+# Install latest rojo
+RUN /root/.rokit/bin/rokit trust Quenty/rojo && \
+    /root/.rokit/bin/rokit add --global Quenty/rojo

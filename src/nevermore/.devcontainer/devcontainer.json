@@ -6,7 +6,7 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "luau-lsp.server.path": "/root/.rokit/tool-storage/quenty/luau-lsp/1.58.0-quenty.1"
+                "luau-lsp.server.path": "/root/.rokit/tool-storage/quenty/luau-lsp/1.58.0-quenty.1/luau-lsp"
             },
             "extensions": [
                 "JohnnyMorganz.luau-lsp@1.58.0"
