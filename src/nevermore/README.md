@@ -32,7 +32,10 @@ There is some setup required before going ahead with running your project a litt
 This container comes with `Rokit` for toolchain management, it's also compatible with preexisting Aftman and Foreman managed projects. If you don't know which one to use/ don't have a preference, use the bundled Rokit.
 For this guide, it is assumed that you use rokit in your project, use the equivalent commands for whichever toolchain manager you're using.
 
-Use Quenty's rojo `Quenty/rojo` for all your rojo needs. This comes preinstalled with the container to automatically generate your sourcemap file for the lsp to work
+Use Quenty's rojo `Quenty/rojo` for all your rojo needs
+```bash
+rokit add quenty/rojo
+```
 
 ## Installation
 
@@ -54,7 +57,7 @@ rokit install
 ```
 and 
 ```bash
-pnpm install
+npm install
 ```
 
 Afterwards make sure to reload your luau lsp in vscode if it gave you any errors about the sourcemap, you can do it by pressing Ctrl+Shift+P and running `Luau: Reload Language Server`. If running in a large codebase it might take a bit to index all files the first time.
@@ -71,7 +74,7 @@ rokit install
 ```
 and 
 ```bash
-pnpm install
+npm install
 ```
 
 Afterwards make sure to reload your luau lsp in vscode if it gave you any errors about the sourcemap, you can do it by pressing Ctrl+Shift+P and running `Luau: Reload Language Server`. If running in a large codebase it might take a bit to index all files the first time.
